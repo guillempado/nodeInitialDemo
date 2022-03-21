@@ -48,3 +48,18 @@ Follow the steps below:
 * [Node Developers Guide](https://nodejs.dev/learn)
 * **.gitignore file** configuration. See [Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
 * **Git branches**. See [Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+
+
+<hr>
+
+# Sprint4_GuillemParrado
+
+
+Per importar col·lecció Postman:
+1. Obrir Postman -> Collections -> Import -> seleccionar `Sprint4_GuillemParrado.postman_collection.json`
+
+Els endpoints de l'API son:
+- GET /user: retorna usuari Guillem, l'edat i la url des d'on es fa el request
+- POST /upload: permet pujar des d'un form un arxiu d'imatge que tingui extensió png, jpg o gif. Retorna un missatge d'error en cas que l'extensió de l'arxiu no coincideixi amb aquestes.
+- POST /time: Necessita autenticació bàsica, rep com a paràmetre un JSON amb el nom d'usuari i retorna un objecte JSON que amb l'hora i data actual. Afegeix a la capçalera 'Cache-control: no-cache' i habilita CORS en les respostes. En cas de no rebre autenticació o un cos JSON amb el nom d'usuari, retorna error 400.
+

@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "56b334ac-635e-433e-bec6-6dcb066d5ba0",
+		"name": "GuillemParrado_Entrega4.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Nivell 1",
+			"item": [
+				{
+					"name": "Exercici 1",
+					"item": [
+						{
+							"name": "/user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/user",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exercici 2",
+					"item": [
+						{
+							"name": "filetype: jpg",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/guillem/code/bootcamp/nodeInitialDemo/postman_requests/nodejs.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filetype: png",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/guillem/code/bootcamp/nodeInitialDemo/postman_requests/nodejs.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filetype: gif",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/guillem/code/bootcamp/nodeInitialDemo/postman_requests/nodejs.gif"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filetype: sense file",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filetype: sense filetype",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/guillem/code/bootcamp/nodeInitialDemo/postman_requests/nodejs"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filetype: wrong filetype",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/guillem/code/bootcamp/nodeInitialDemo/postman_requests/nodejs.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/upload",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"upload"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Nivells 2, 3",
+			"item": [
+				{
+					"name": "Exercici 1",
+					"item": [
+						{
+							"name": "/time authorized",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "guillem",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Guillem Parrado\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost/time",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"time"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/time authorized sense cos",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "guillem",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost/time",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"time"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/time unauthorized",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Guillem Parrado\"\r\n}"
+								},
+								"url": {
+									"raw": "localhost/time",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"time"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Extra: Default Routes",
+			"item": [
+				{
+					"name": "GET /badRoute",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/badRoute",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"badRoute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /anotherBadRoute",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost/anotherBadRoute",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"anotherBadRoute"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
