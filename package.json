@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node app/app.js",
+    "dev": "nodemon --trace-warnings app/app.js",
+    "demo": "node app/data-layer_demo-app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^9.0.2",
-    "nodemon": "^2.0.7",
+    "colorette": "^2.0.16",
+    "dotenv": "^15.0.0",
+    "inquirer": "^8.2.0",
+    "mongoose": "^6.1.9",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
     "pm2": "^4.5.6"
   }
 }
