@@ -2,9 +2,9 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 
 router.use((req, res, next) => {
-    const token = req.headers['x-access-token'];
+    const token = req.cookies['x-access-token'];
     
-    // console.log(token);
+    console.log(token);
     
     if (token) {
         jwt.verify(

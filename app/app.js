@@ -2,14 +2,14 @@ var express = require('express');
 var app = express(); 
 var server = require('http').Server(app); 
 var io = require('socket.io')(server); 
+var cookieParser = require('cookie-parser')
 
 const defaultRoutes = require('./routes/default')
 const loginRoutes = require('./routes/login')
+const registerRoutes = require('./routes/register')
 const demoProtectedRoute = require('./routes/demoProtectedRoute')
 
 global.config = require('./config');
-
-
 
 
 var messages = [{ 
@@ -17,16 +17,20 @@ var messages = [{
     text: "Missatge preexistent"
 }]; 
 
-// Temporalment
-app.use(express.static('app/client')); 
+
 
 // Middleware
 app.use(express.json())
+app.use(cookieParser())
 
 // Routes
 app.use('/login', loginRoutes)
+app.use('/register', registerRoutes)
 app.use('/protected', demoProtectedRoute)
 //...
+
+// Temporalment
+app.use(express.static('app/client')); 
 
 // Default Routes al final (per wildcards)
 app.use('/', defaultRoutes)

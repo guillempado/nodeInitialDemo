@@ -1,4 +1,5 @@
 module.exports = {
     secretKey: "Guillem Parrado",
     algorithm: 'HS256', //default: HS256
+    expiresIn: '1d'
 };
