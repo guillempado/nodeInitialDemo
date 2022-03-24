@@ -3,14 +3,36 @@ var app = express();
 var server = require('http').Server(app); 
 var io = require('socket.io')(server); 
 
+const defaultRoutes = require('./routes/default')
+const loginRoutes = require('./routes/login')
+const demoProtectedRoute = require('./routes/demoProtectedRoute')
+
+global.config = require('./config');
+
+
+
+
 var messages = [{ 
     author: "Guillem P.",
     text: "Missatge preexistent"
 }]; 
 
-// Serveix el client per GET request
-app.use(express.static('public')); 
+// Temporalment
+app.use(express.static('app/client')); 
 
+// Middleware
+app.use(express.json())
+
+// Routes
+app.use('/login', loginRoutes)
+app.use('/protected', demoProtectedRoute)
+//...
+
+// Default Routes al final (per wildcards)
+app.use('/', defaultRoutes)
+
+
+// Socket events
 io.on('connection', socket => { 
     console.log('Nova connexió per sockets');
     
@@ -29,6 +51,7 @@ io.on('connection', socket => {
     }); 
 }); 
 
-server.listen(80, function() { 
+// Serve express app
+server.listen(80, () => { 
     console.log("Server running on http://localhost:80"); 
 });

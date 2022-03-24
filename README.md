@@ -153,5 +153,32 @@ MySQL amb sequelize. Inicialització:
 2. Les taules les crea el mateix sequelize, només caldrà executar com a root la creació de l'usuari per l'aplicació, grant de privilegis i creació de la taula.
 3. Proposta de mecanisme: sql script per DROP_CREATE, sql script per CREATE i execSync a start d l'aplicació que recuperi de vars d'entorn si cal executar algun script com a root user i ho faci. 
 
+<br>
+
+# Fonts
+
+## Demos
+
+- sockets: https://medium.com/@carlosazaustre/usando-websockets-con-nodejs-y-socketio-b02f66bcb58d
+- basicAuth: https://www.dotnettricks.com/learn/nodejs/token-based-authentication-using-json-web-token
 
 
+<br>
+
+# Instruccions
+
+## Login demo
+
+Important: només es garanteix el funcionament de la demo al commit de la demo. Els commits que vinguin després prioritzaran l'app, per exemple no té sentit mantenir 'demoProtectedRoute'.
+
+Per executar la demo:
+1. Importar la col·lecció de Postman
+2. Executar POST /login
+3. Copiar el jwtoken rebut (sense les "") i enganxar-lo al header 'x-access-token' de GET /protected
+4. Executar GET /protected
+
+El token caduca en 1 minut i es comprova que:
+1. En enviar request amb el token nou, l'API retorna status 200 amb missatge: "Protected route accessed!"
+2. Es pot reenviar el GET requests tants cops com es vulgui i s'obté el mateix resultat dins del minut en què el token és vàlid
+3. En passar un minut, sense modificar res i renviar el request, l'API retorna status 401 amb missatge: "Unauthorized Access"
+4. Si eliminem el token, l'API retorna status 403 amb missatge: "Forbidden Access"
