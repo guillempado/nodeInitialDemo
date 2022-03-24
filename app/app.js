@@ -7,7 +7,10 @@ var cookieParser = require('cookie-parser')
 const defaultRoutes = require('./routes/default')
 const loginRoutes = require('./routes/login')
 const registerRoutes = require('./routes/register')
-const demoProtectedRoute = require('./routes/demoProtectedRoute')
+const roomsRoutes = require('./routes/rooms')
+const chatRoutes = require('./routes/chat')
+const userRoutes = require('./routes/user')
+
 
 global.config = require('./config');
 
@@ -17,8 +20,6 @@ var messages = [{
     text: "Missatge preexistent"
 }]; 
 
-
-
 // Middleware
 app.use(express.json())
 app.use(cookieParser())
@@ -26,11 +27,9 @@ app.use(cookieParser())
 // Routes
 app.use('/login', loginRoutes)
 app.use('/register', registerRoutes)
-app.use('/protected', demoProtectedRoute)
-//...
-
-// Temporalment
-app.use(express.static('app/client')); 
+app.use('/rooms', roomsRoutes)
+app.use('/chat', chatRoutes)
+app.use('/user', userRoutes)
 
 // Default Routes al final (per wildcards)
 app.use('/', defaultRoutes)

@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 router.use((req, res, next) => {
     const token = req.cookies['x-access-token'];
     
-    console.log(token);
-    
     if (token) {
         jwt.verify(
             token, 
@@ -13,30 +11,15 @@ router.use((req, res, next) => {
             { algorithm: global.config.algorithm }, 
             (err, decoded) => {
                 if (err) {
-                    /*
-                    const errordata = {
-                        message: err.message,
-                        expiredAt: err.expiredAt
-                    };
-                    console.log(errordata);
-                    */
-                    return res.status(401).json({
-                        message: 'Unauthorized Access'
-                    });
+                    res.redirect('/login')
                 }
-                /*
-                req.decoded = decoded;
-                console.log(decoded);
-                */
                 next();
             }
         );
     }
 
     else {
-        return res.status(403).json({
-            message: 'Forbidden Access'
-        });
+        res.redirect('/login')
     }
 });
 

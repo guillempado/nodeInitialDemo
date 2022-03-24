@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const path = require('path');
+
+
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/../client/html/register.html'));
+})
 
 router.post('/', (req, res) => {
     
@@ -28,7 +34,7 @@ router.post('/', (req, res) => {
     });
 
     // Estableix cookie d'accés i reenvia a rooms
-    res.status(200).cookie('x-access-token', token).redirect('/rooms.html');
+    res.status(200).cookie('x-access-token', token).redirect('/rooms');
 
 });
 
