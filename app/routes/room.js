@@ -3,7 +3,7 @@ const path = require('path');
 const verifyToken = require('../middleware/verifyToken')
 
 router.get('/', verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, '/../client/html/chat.html'));
+    res.sendFile(path.join(__dirname, '/../client/room.html'));
 })
 
 module.exports = router

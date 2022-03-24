@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo amb sockets</title>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script type = "text/javascript">  
+
+    var socket = io.connect('http://localhost:80', { 'forceNew': true }); 
+
+    socket.on('messages', data => { 
+      render(data);
+    });
+
+    render = data => { 
+      var html = data.map(function(elem, index) { 
+        return(`<div>
+                <strong>${elem.author}</strong>: 
+                <em>${elem.text}</em> </div>`);
+      }).join(" ");   
+
+      document.getElementById('messages').innerHTML = html; 
+    } 
+
+    addMessage = e => { 
+      let message = { 
+        author: document.getElementById('username').value, 
+        text: document.getElementById('message').value 
+      }; 
+
+      socket.emit('new-message', message); return false; 
+    }
+
+  </script>
+</head>
+<body>
+
+  <!-- Placeholder de barra de navegació real quan tingui l'app de front -->
+  <a href="/rooms">Rooms</a>
+  <a href="/login">Login/Signout</a> <!-- Mostrar només un dels dos segons si logged o no. Signout elimina cooki d'auth i redirecciona a login altre cop -->
+  <a href="/user">User Settings</a>
+
+
+  <h1>Nom de la sala</h1>
+  <div id="messages"></div>
+  <br/>
+  <form onsubmit="addMessage(this)">
+    <input type="text" id="username" placeholder="Usuari" >   
+    <input type="text" id="message" placeholder="Missatge">  
+    <input type="submit" value="Enviar!">
+  </form>
+</body>
+</html>

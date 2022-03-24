@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rooms</title>
+  <script type = "text/javascript">  
+
+  //...
+
+  </script>  
+</head>
+
+<body>
+  
+  <!-- Placeholder de barra de navegació real quan tingui l'app de front -->
+  <a href="/rooms">Rooms</a>
+  <a href="/login">Login/Signout</a> <!-- Mostrar només un dels dos segons si logged o no. Signout elimina cooki d'auth i redirecciona a login altre cop -->
+  <a href="/user">User Settings</a>
+  
+  <h1>Rooms</h1>
+  
+  <div id="errorMessage"></div>
+
+  <p>Click a room to enter the chat:<p>
+
+  ...Room 1...<br/>
+  ...Room 2......<br/>
+  ...Room 3.........<br/>
+  
+  <br/>
+
+  <form action= "/rooms" method="POST">
+    <input type="text" id="newRoomName" name="newRoomName" placeholder="Nova sala" >
+    <input type="submit" value="Crea">
+  </form>
+
+</body>
+</html>

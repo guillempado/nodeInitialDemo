@@ -10,7 +10,7 @@ const defaultRoutes = require('./routes/default')
 const loginRoutes = require('./routes/login')
 const registerRoutes = require('./routes/register')
 const roomsRoutes = require('./routes/rooms')
-const chatRoutes = require('./routes/chat')
+const roomRoutes = require('./routes/room')
 const userRoutes = require('./routes/user')
 
 global.config = require('./config');
@@ -31,7 +31,7 @@ app.use(cookieParser())
 app.use('/login', loginRoutes)
 app.use('/register', registerRoutes)
 app.use('/rooms', roomsRoutes)
-app.use('/chat', chatRoutes)
+app.use('/room', roomRoutes)
 app.use('/user', userRoutes)
 
 // Default Routes al final (per wildcards)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login/Register</title>
+
+  <script type = "text/javascript">  
+
+    function getURLParameter(sParam) {
+      const urlPairVars = window.location.search.substring(1).split('&')
+      for (const pair of urlPairVars) {
+        const key_value = pair.split('=')
+        console.log(key_value[0]);
+        if(sParam === key_value[0])
+          return key_value[1]
+      }
+    }
+
+    function paintErrorMessage() {
+      if(getURLParameter('errorMessage') === 'usernameDoesntExists'){
+        document.getElementById('errorMessage').innerHTML = 'Error: Username doesn\'t exists <br><br>';
+      }
+      if(getURLParameter('errorMessage') === 'badPassword') {
+        document.getElementById('errorMessage').innerHTML = 'Error: Wrong password <br><br>';
+      }
+      if(getURLParameter('errorMessage') === 'nullField') {
+        document.getElementById('errorMessage').innerHTML = 'Error: Username or password not filled <br><br>'
+      }
+      
+    }  
+
+    </script>  
+</head>
+<body onload="paintErrorMessage()">
+
+  <!-- Placeholder de barra de navegació real quan tingui l'app de front -->
+  <a href="/rooms">Rooms</a>
+  <a href="/login">Login/Signout</a> <!-- Mostrar només un dels dos segons si logged o no. Signout elimina cooki d'auth i redirecciona a login altre cop -->
+  <a href="/user">User Settings</a>
+
+  <h1>Login</h1>
+  <br/>
+  
+  <div id="errorMessage"></div>
+
+  <form action= "/login" method="POST">
+    <input type="text" id="username" name="username" placeholder="Username" >   
+    <br><br>
+    <input type="password" id="password" name="password" placeholder="Password">  
+    <br><br>
+    <input type="submit" value="Log in">
+  </form>
+  <p>Don't have an account? <a href="/register">Register here</a></p>
+  <p>Or enter using <a href="https://support.google.com/accounts/answer/112802?hl=en&co=GENIE.Platform%3DDesktop">Google Auth</a></p>
+</body>
+</html>

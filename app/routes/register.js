@@ -6,7 +6,7 @@ const User = require('../models/User')
 
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/../client/html/register.html'));
+    res.sendFile(path.join(__dirname, '/../client/register.html'));
 })
 
 router.post('/', (req, res) => {
