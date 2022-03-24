@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app); 
 var io = require('socket.io')(server); 
 var cookieParser = require('cookie-parser')
+require('./models/utils/wireSequelize')
 
 const defaultRoutes = require('./routes/default')
 const loginRoutes = require('./routes/login')
@@ -11,9 +12,7 @@ const roomsRoutes = require('./routes/rooms')
 const chatRoutes = require('./routes/chat')
 const userRoutes = require('./routes/user')
 
-
 global.config = require('./config');
-
 
 var messages = [{ 
     author: "Guillem P.",
