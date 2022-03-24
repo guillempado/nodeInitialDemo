@@ -3,14 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Login/Register</title>
+  <script type = "text/javascript">  
+
+    function getURLParameter(sParam) {
+      const urlPairVars = window.location.search.substring(1).split('&')
+      for (const pair of urlPairVars) {
+        const key_value = pair.split('=')
+        console.log(key_value[0]);
+        if(sParam === key_value[0])
+          return key_value[1]
+      }
+    }
+
+    function paintErrorMessage() {
+      if(getURLParameter('errorMessage') === 'usernameAlreadyExists'){
+        document.getElementById('errorMessage').innerHTML = 'Error: Username already exists <br><br>';
+      }
+      if(getURLParameter('errorMessage') === 'nullField') {
+        document.getElementById('errorMessage').innerHTML = 'Error: Username or password not filled <br><br>'
+      }
+      
+    }  
+
+    </script>  
 </head>
-<body>
+<body onload="paintErrorMessage()">
   <h1>Register</h1>
   <br/>
+  
+  <div id="errorMessage"></div>
+
   <form action= "/register" method="POST">
-    <input type="text" id="username" placeholder="Username" >
+    <input type="text" id="username" name="username" placeholder="Username" >
     <br><br>
-    <input type="text" id="password" placeholder="Password">
+    <input type="password" id="password" name="password" placeholder="Password">
     <br><br> 
     <input type="submit" value="Register">
   </form>

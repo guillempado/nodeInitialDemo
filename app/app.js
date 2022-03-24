@@ -4,6 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server); 
 var cookieParser = require('cookie-parser')
 require('./models/utils/wireSequelize')
+const bodyParser = require('body-parser')
 
 const defaultRoutes = require('./routes/default')
 const loginRoutes = require('./routes/login')
@@ -20,8 +21,11 @@ var messages = [{
 }]; 
 
 // Middleware
-app.use(express.json())
+
+app.use( bodyParser({ extended: false }) )
+
 app.use(cookieParser())
+
 
 // Routes
 app.use('/login', loginRoutes)
