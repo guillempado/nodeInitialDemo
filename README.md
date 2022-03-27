@@ -5,7 +5,7 @@ La aplicación usa el puerto local 9000. Todos los endpoints derivan de la base 
 ## NIVEL 1
 ### EJERCICIO 1
 
-http://localhost:9000/user o en postman bajo el nombre JSON with name.
+http://localhost:9000/user o en postman.
 
 ### EJERCICIO 2
 
