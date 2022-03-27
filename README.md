@@ -1,6 +1,7 @@
 # SPRINT4_1: Node REST Server Instructions
 
 La aplicación usa el puerto local 9000. Todos los endpoints derivan de la base http://localhost:9000/. Se adjunta un archivo los las peticiones hechas en postman para testear los distintos endpoints.
+Script start para empezar.
 
 ## NIVEL 1
 ### EJERCICIO 1
