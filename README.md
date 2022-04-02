@@ -162,12 +162,27 @@ MySQL amb sequelize. Inicialització:
 - sockets: https://medium.com/@carlosazaustre/usando-websockets-con-nodejs-y-socketio-b02f66bcb58d
 - basicAuth: https://www.dotnettricks.com/learn/nodejs/token-based-authentication-using-json-web-token
 
+## Desat de contrassenyes a BBDD: Implementació per Salted Hash
+- https://www.codementor.io/@petrepopescu/how-to-properly-store-a-password-in-the-database-1k0qcoog92
+- https://www.geeksforgeeks.org/store-password-database/
+- https://www.vaadata.com/blog/how-to-securely-store-passwords-in-database/
+- https://www.codespot.org/hashing-passwords-in-nodejs/
+
 
 <br>
 
-# Instruccions
+# Git Tags
+
+- Apartat per explicar una mica què hi ha a cada Tag de la branca Git.
+
+
+## Sockets demo
+
+Reimplementació de la demo de [l'article de Medium](https://medium.com/@carlosazaustre/usando-websockets-con-nodejs-y-socketio-b02f66bcb58d). Prova de concepte i punt de partida d'implementació de la funcionalitat.
 
 ## Login demo
+
+Prova de concepte del cas d'ús de login mitjançant tokens de sessió. Punt de partida de la implementació i debug.
 
 Important: només es garanteix el funcionament de la demo al commit de la demo. Els commits que vinguin després prioritzaran l'app, per exemple no té sentit mantenir 'demoProtectedRoute'.
 
@@ -182,3 +197,31 @@ El token caduca en 1 minut i es comprova que:
 2. Es pot reenviar el GET requests tants cops com es vulgui i s'obté el mateix resultat dins del minut en què el token és vàlid
 3. En passar un minut, sense modificar res i renviar el request, l'API retorna status 401 amb missatge: "Unauthorized Access"
 4. Si eliminem el token, l'API retorna status 403 amb missatge: "Forbidden Access"
+
+
+## Before_react
+
+Versió de l'app abans de separar client i servidor: 
+- Servidor retorna HTML amb JS incrustat en tag script adhoc en comptes d'haver-hi una separació real i que servidor funcioni només com a API.
+- No hi ha funcionalitat d'estil (Bootstrap, CSS).
+
+Funcions implementades:
+1. S'han modelat totes les vistes i la navegació entre elles.
+2. S'ha implementat comunicació per sockets a mode demo entre client i servidor per la pàgina de xats.
+3. S'ha implementat el model de dades, la permanència amb sequelize i les opcions d'inicialització de la base de dades mitjançant variables d'entorn (consultar /.env-template)
+4. S'ha implementat la pàgina de login i la de register d'usuaris: de moment només es poden enregistrar per basic Auth (introduint username i password) i l'app guarda les contrassenyes com a salted hash.
+5. S'ha implementat la generació del token de sessió a partir de l'username + password, el qual té caducitat i es retorna com a cookie un cop l'usuari s'ha autenticat (per creació de nou usuari o login).
+6. S'ha implementat (i fet ús d') un middleware que comprova que els requests del client continguin un token de sessió vàlid a les cookies del header per permetre l'accés a la pàgina. En cas contrari, es fa redirecció a la pàgina de login.
+7. S'ha implementat el print de missatges d'error per query params (pag rep l'error i JS l'imprimeix sobre un div buit d'id=errorMessage).
+
+Feina pendent, primera iteració:
+1. Crear una SPA en React + Redux + Bootstrap que recordi a Whatsapp o Telegram: 1/4-1/3 de l'esquerra de la pantalla per llista de sales + opció de crear sala, cantó dret amb el xat + formulari d'entrada i enviament de nou missatge ancorat a baix.
+2. Pel que fa al servidor, haurà de quedar implementat completament com un REST API: les rutes disponibles s'hauran d'ajustar a la manera correcta de construir URIs, l'API haurà de retornar un JSON en tots els casos, s'haurà d'aportar documentació de les rutes, finalment s'haurà d'aportar també la col·lecció de Postman per provar l'API.
+
+Feina pendent, segona iteració:
+1. Implementar l'autenticació per Google Auth i que un mateix usuari pugui tenir les dues formes d'autenticació.
+2. En cas que quedi temps, millorar l'app amb alguna de les següents opcions:
+   1. Fer el client responsive, des de >1080p fins a amplada de mòbil (col·lapsant sales a menú d'hamburguesa i que només es mostri la vista de xat, etc.).
+   2. Reimplementar l'API en Typescript.
+   3. Funcionalitat d'usuari: permetre afegir una descripció i un avatar, que l'avatar es mostri en miniatura als xats al costat del nom, que clicar sobre l'avatar d'un usuari al xat porti a la seva pàgina personal...
+   4. Personalització de l'estil: Bootstrap és genèric, millorar afegint CSS sobre propietats concretes i mostrar així vistes més personalitzades.
