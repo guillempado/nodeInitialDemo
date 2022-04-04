@@ -149,11 +149,11 @@ Alternativa d'error:
 S'ha marcat amb etiquetes de Git els commits principals de l'aplicació i s'expliquen a continuació.
 
 
-## Sockets demo
+## 1) Sockets demo
 
 Reimplementació de la demo de [l'article de Medium](https://medium.com/@carlosazaustre/usando-websockets-con-nodejs-y-socketio-b02f66bcb58d). Prova de concepte i punt de partida d'implementació de la funcionalitat.
 
-## Login demo
+## 2) Login demo
 
 Prova de concepte del cas d'ús de login mitjançant tokens de sessió. Punt de partida de la implementació i debug.
 
@@ -172,7 +172,7 @@ El token caduca en 1 minut i es comprova que:
 4. Si eliminem el token, l'API retorna status 403 amb missatge: "Forbidden Access"
 
 
-## BBDD
+## 3) BBDD
 
 MySQL amb sequelize. Inicialització:
 
@@ -181,13 +181,13 @@ MySQL amb sequelize. Inicialització:
 3. Proposta de mecanisme: sql script per DROP_CREATE, sql script per CREATE i execSync a start d l'aplicació que recuperi de vars d'entorn si cal executar algun script com a root user i ho faci. 
 
 
-## Before_react
+## 4) Before_react
 
 Versió de l'app abans de separar client i servidor: 
 - Servidor retorna HTML amb JS incrustat en tag script adhoc en comptes d'haver-hi una separació real i que servidor funcioni només com a API.
 - No hi ha funcionalitat d'estil (Bootstrap, CSS).
 
-Funcions implementades:
+### 4.1) Funcions implementades:
 1. S'han modelat totes les vistes i la navegació entre elles.
 2. S'ha implementat comunicació per sockets a mode demo entre client i servidor per la pàgina de xats.
 3. S'ha implementat el model de dades, la permanència amb sequelize i les opcions d'inicialització de la base de dades mitjançant variables d'entorn (consultar /.env-template)
@@ -196,11 +196,11 @@ Funcions implementades:
 6. S'ha implementat (i fet ús d') un middleware que comprova que els requests del client continguin un token de sessió vàlid a les cookies del header per permetre l'accés a la pàgina. En cas contrari, es fa redirecció a la pàgina de login.
 7. S'ha implementat el print de missatges d'error per query params (pag rep l'error i JS l'imprimeix sobre un div buit d'id=errorMessage).
 
-Feina pendent, primera iteració:
+### 4.2) Feina pendent, primera iteració:
 1. Crear una SPA en React + Redux + Bootstrap que recordi a Whatsapp o Telegram: 1/4-1/3 de l'esquerra de la pantalla per llista de sales + opció de crear sala, cantó dret amb el xat + formulari d'entrada i enviament de nou missatge ancorat a baix.
 2. Pel que fa al servidor, haurà de quedar implementat completament com un REST API: les rutes disponibles s'hauran d'ajustar a la manera correcta de construir URIs, l'API haurà de retornar un JSON en tots els casos, s'haurà d'aportar documentació de les rutes, finalment s'haurà d'aportar també la col·lecció de Postman per provar l'API.
 
-Feina pendent, segona iteració:
+### 4.3) Feina pendent, segona iteració:
 1. Implementar l'autenticació per Google Auth i que un mateix usuari pugui tenir les dues formes d'autenticació.
 2. En cas que quedi temps, millorar l'app amb alguna de les següents opcions:
    1. Fer el client responsive, des de >1080p fins a amplada de mòbil (col·lapsant sales a menú d'hamburguesa i que només es mostri la vista de xat, etc.).
@@ -223,3 +223,16 @@ Feina pendent, segona iteració:
 - https://www.geeksforgeeks.org/store-password-database/
 - https://www.vaadata.com/blog/how-to-securely-store-passwords-in-database/
 - https://www.codespot.org/hashing-passwords-in-nodejs/
+
+## React client
+- https://create-react-app.dev/docs/getting-started/
+- https://dev.to/ericchapman/react-cheat-sheet-updated-may-2021-1mcd
+- https://www.telerik.com/blogs/react-class-component-vs-functional-component-how-choose-whats-difference
+- https://javascript.info/
+- https://reactjs.org/docs/refs-and-the-dom.html
+- https://reactjs.org/docs/context.html
+- https://reactjs.org/docs/react-component.html
+- https://react-redux.js.org/
+- https://react-bootstrap.github.io/
+- https://github.com/vicenlu/react-movies-web
+- https://www.w3schools.com/react/react_router.asp
