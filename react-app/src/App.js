@@ -1,9 +1,10 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import NoPage from './pages/NoPage';
 import Register from './pages/Register';
 import User from './pages/User';
-import ChatsPage from './pages/Chats';
+import ChatsPage from './pages/ChatsPage';
 import NavBar from './components/NavBar';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";

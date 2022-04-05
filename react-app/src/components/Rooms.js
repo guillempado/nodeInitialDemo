@@ -10,7 +10,11 @@
  */
 
 const Rooms = () => {
-    return <h1>Rooms</h1>;
+    return(
+      <div className = "rooms-area ">
+        <h1>Rooms</h1>
+      </div>
+    );
   };
   
   export default Rooms;

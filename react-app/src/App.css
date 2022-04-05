@@ -1,3 +1,21 @@
 .App {
   text-align: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.chat-area {
+  background-color: #f6f6f6;
+  height: 100%;
+}
+
+.rooms-area {
+  background-color: #DDD;
+  height: 100%;
+}
+
+.main-area {
+  height: 100%;
 }

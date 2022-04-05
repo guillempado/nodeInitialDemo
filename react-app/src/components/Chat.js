@@ -1,4 +1,3 @@
-
 // TODO implementació
 
 /**
@@ -6,12 +5,16 @@
  * Conté un formulari fix al final (a baix de tot) per escriure i enviar missatges
  * Els missatges es mostren en espai scrollable per poder-ne llegir tot l'historial
  * El component es mostra en panell dret de pàgina de xats
- * @returns 
+ * @returns
  */
 
 const Chat = () => {
-    return <h1>Chat</h1>;
-  };
-  
-  export default Chat;
-  
+  return (
+    <div className="chat-area">
+      <h1>Chat</h1>
+      <p>asdf</p>
+    </div>
+  );
+};
+
+export default Chat;

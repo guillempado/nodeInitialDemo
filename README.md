@@ -236,3 +236,4 @@ Versió de l'app abans de separar client i servidor:
 - https://react-bootstrap.github.io/
 - https://github.com/vicenlu/react-movies-web
 - https://www.w3schools.com/react/react_router.asp
+- https://smartdevpreneur.com/the-ultimate-guide-to-bootstrap-padding/
