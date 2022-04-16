@@ -13,8 +13,18 @@ import Lorem from "./MontyPythonLorem";
 const Rooms = () => {
   return (
     <div className="rooms-area">
-      <h1>Rooms</h1>
-      <Lorem />
+      <div style={{ height: "3%" }}>
+        <h1
+          id="rooms-title"
+          style={{ height: "100%", "background-color": "blue", color: "white" }}
+        >
+          Rooms
+        </h1>
+      </div>
+      <div style={{ height: "84%", overflow: 'auto' }}>
+        <Lorem />
+      </div>
+      <h1> Create new room</h1>
     </div>
   );
 };

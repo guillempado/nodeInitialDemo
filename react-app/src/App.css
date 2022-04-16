@@ -15,16 +15,23 @@
   position: relative;
   background-color: #DDD;
   height: 100%;
-  width: 25%;
+  width: 100%;
 }
 
 .chat-area {
   position: relative;
   background-color: #f6f6f6;
   height: 100%;
-  width: 75%;
+  width: 100%;
 }
 
 .scrollable-div {
   overflow-y: scroll;
+  height: 100%;
 }
+
+#rooms-title {
+  color: red;
+  height: 50%;
+}
+
