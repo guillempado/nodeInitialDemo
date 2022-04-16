@@ -1,3 +1,4 @@
+import Lorem from "./MontyPythonLorem";
 
 // TODO implementació
 
@@ -6,16 +7,16 @@
  * Permet accedir a subcomponent per crear una sala nova
  * Les sales es mostren en espai scrollable per poder explorar-es totes
  * El component es mostra en panell esquerra de la pàgina de xats
- * @returns 
+ * @returns
  */
 
 const Rooms = () => {
-    return(
-      <div className = "rooms-area ">
-        <h1>Rooms</h1>
-      </div>
-    );
-  };
-  
-  export default Rooms;
-  
+  return (
+    <div className="rooms-area">
+      <h1>Rooms</h1>
+      <Lorem />
+    </div>
+  );
+};
+
+export default Rooms;

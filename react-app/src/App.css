@@ -1,21 +1,30 @@
 .App {
   text-align: center;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.chat-area {
-  background-color: #f6f6f6;
-  height: 100%;
-}
-
-.rooms-area {
-  background-color: #DDD;
-  height: 100%;
+  position: relative;
 }
 
 .main-area {
+  position: fixed;
+  top:40px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+}
+
+.rooms-area {
+  position: relative;
+  background-color: #DDD;
   height: 100%;
+  width: 25%;
+}
+
+.chat-area {
+  position: relative;
+  background-color: #f6f6f6;
+  height: 100%;
+  width: 75%;
+}
+
+.scrollable-div {
+  overflow-y: scroll;
 }
