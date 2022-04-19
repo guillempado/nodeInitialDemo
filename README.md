@@ -10,7 +10,7 @@ http://localhost:9000/user o en postman.
 
 ### EJERCICIO 2
 
-Para subir, desde las peticiones de postman, hay que proporcionar la imagen que se desea subir en la pestaña Body, bajo la key imagen1 de la request. Para testear el mensaje de error, proporcionar un archivo con una extensión que no corresponda a imagen.
+Para subir, desde las peticiones de postman, hay que proporcionar la imagen que se desea subir en la pestaña Body, bajo la key nodeImg de la request. Para testear el mensaje de error, proporcionar un archivo con una extensión que no corresponda a imagen.
 
 ## NIVEL 2 Y 3
 
