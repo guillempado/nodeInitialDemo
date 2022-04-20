@@ -1,4 +1,4 @@
-// TODO implementació
+// TODO websockets
 
 /**
  * Component de Xat que connecta per sockets amb back i mostra els missatges
@@ -10,9 +10,17 @@
 
 const Chat = () => {
   return (
-    <div className="chat-area">
-      <h1>Chat</h1>
-      <p>asdf</p>
+    <div style={{"background-color": "#76f77b", height: "100%", "text-align": "center"}}>
+      <h1>Messages</h1>
+      
+      <div style={{"text-align": "left", "padding":  "0 5rem 0 5rem"}}> 
+      <h3> Add new message form</h3>
+      <br/>
+        asdf<br/>
+        asdf<br/>
+        asdf<br/>
+      </div>
+      
     </div>
   );
 };

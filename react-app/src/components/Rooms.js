@@ -1,6 +1,6 @@
 import Lorem from "./MontyPythonLorem";
 
-// TODO implementació
+// TODO websockets
 
 /**
  * Component de sales que es connecta per sockets a back i mostra les sales disponibles
@@ -12,19 +12,20 @@ import Lorem from "./MontyPythonLorem";
 
 const Rooms = () => {
   return (
-    <div className="rooms-area">
-      <div style={{ height: "3%" }}>
+    <div>
         <h1
-          id="rooms-title"
-          style={{ height: "100%", "background-color": "blue", color: "white" }}
+          style={{ "text-align": "center" }}
         >
           Rooms
         </h1>
-      </div>
-      <div style={{ height: "84%", overflow: 'auto' }}>
-        <Lorem />
-      </div>
-      <h1> Create new room</h1>
+      <h3> Create new room form </h3>
+      <br/>
+      <a> Room 1</a><br/>
+      <a> Room 2</a><br/>
+      <a> Room 3</a><br/>
+      <a> Room 4</a><br/>
+      <br/><br/>
+      <Lorem />
     </div>
   );
 };

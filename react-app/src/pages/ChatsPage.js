@@ -1,7 +1,6 @@
 import Rooms from "../components/Rooms";
 import Chat from "../components/Chat";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {Col, Row, Container} from 'react-bootstrap';
 
 /**
  * Mostra els components de Rooms i de Xat, enfrentats un al costat de l'altre tal com estan a Whatsapp web o Telegram Desktop.
@@ -10,13 +9,12 @@ import Col from "react-bootstrap/Col";
  * @returns
  */
 
-// TODO implemetació
 // TODO (caldrà fer wiring d'actualització d'estat de la sala seleccionada)(useState?)
 
 const ChatsPage = () => {
   // padding = 0, gutter = 0
   return (
-    <Row className="p-0 g-0 main-area">
+      <Row style={{height: "100%"}}>
       <Col xs={{ span: 3 }}>
         {/*Components react no introdueixen div de component, cal posar css classes a div arrel DE DINS del component, className aquí no fa res*/}
         <Rooms />
