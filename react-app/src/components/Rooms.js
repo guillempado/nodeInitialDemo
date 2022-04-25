@@ -1,4 +1,5 @@
 import Lorem from "./MontyPythonLorem";
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 // TODO websockets
 
@@ -13,18 +14,33 @@ import Lorem from "./MontyPythonLorem";
 const Rooms = () => {
   return (
     <div>
-        <h1
-          style={{ "text-align": "center" }}
-        >
-          Rooms
-        </h1>
-      <h3> Create new room form </h3>
-      <br/>
-      <a> Room 1</a><br/>
-      <a> Room 2</a><br/>
-      <a> Room 3</a><br/>
-      <a> Room 4</a><br/>
-      <br/><br/>
+      <h1 style={{ "text-align": "center" }}>Sales</h1>
+
+      <Form action="/rooms" method="POST">
+        <Row className="align-items-center" style={{ width: "100%" }}>
+          <Col xs={8}>
+            <Form.Control id="newRoomName" type="text" name="newRoomName"
+          placeholder="Nova sala" />
+          </Col>
+          <Col xs={4}>
+            <Button variant="primary" type="submit">
+              Crea
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+
+      <br />
+      <a> Room 1</a>
+      <br />
+      <a> Room 2</a>
+      <br />
+      <a> Room 3</a>
+      <br />
+      <a> Room 4</a>
+      <br />
+      <br />
+      <br />
       <Lorem />
     </div>
   );

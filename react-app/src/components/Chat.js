@@ -1,3 +1,5 @@
+import { Form, Button, Row, Col } from "react-bootstrap";
+import socketIOClient from "socket.io-client";
 // TODO websockets
 
 /**
@@ -9,18 +11,61 @@
  */
 
 const Chat = () => {
+  const socket = socketIOClient("http://localhost:80");
+
+  socket.on("messages", (data) => {
+    render(data);
+  });
+
+  const render = (data) => {
+    var html = data
+      .map(function (elem, index) {
+        return `<div>
+                <strong>${elem.author}</strong>: 
+                <em>${elem.text}</em> </div>`;
+      })
+      .join(" ");
+
+    document.getElementById("messages").innerHTML = html;
+  };
+
+  const addMessage = (e) => {
+    let message = {
+      author: document.getElementById("username").value,
+      text: document.getElementById("message").value,
+    };
+    console.log(message);
+
+    socket.emit("new-message", message);
+    return false;
+  };
+
   return (
-    <div style={{"background-color": "#76f77b", height: "100%", "text-align": "center"}}>
-      <h1>Messages</h1>
-      
-      <div style={{"text-align": "left", "padding":  "0 5rem 0 5rem"}}> 
-      <h3> Add new message form</h3>
-      <br/>
-        asdf<br/>
-        asdf<br/>
-        asdf<br/>
+    <div
+      style={{
+        "background-color": "#76f77b",
+        height: "100%",
+        "text-align": "center",
+      }}
+    >
+      <h1>Nom de la sala</h1>
+
+      <div style={{ "text-align": "left", padding: "0 5rem 0 5rem" }}>
+        <Form onSubmit="addMessage(this)">
+          <Row className="align-items-center" style={{ width: "100%" }}>
+            <Col xs={10}>
+              <Form.Control id="message" type="text" placeholder="Missatge" />
+            </Col>
+            <Col xs={2}>
+              <Button variant="primary" type="submit">
+                Enviar!
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+        <br />
+        <div id="messages"></div>
       </div>
-      
     </div>
   );
 };

@@ -11,7 +11,10 @@ router.use((req, res, next) => {
             { algorithm: global.config.algorithm }, 
             (err, decoded) => {
                 if (err) {
-                    res.redirect('/login')
+                    res.status(401);
+                    res.send({
+                        error: 'Unauthorised'
+                    })
                 }
                 next();
             }
