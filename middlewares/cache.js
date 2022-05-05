@@ -1,7 +1,15 @@
-const cache = (req,res,next) =>{
+"use strict";
+
+  // Configuración de middleware para el control de caché (métodos "POST")
+  
+let cacheMiddleware = (req,res,next)=>{
+  if (req.method == 'POST') {
     res.set("Cache-control", "no-cache");
-    next();
-
+} else {
+    res.set("Cache-control", "no-store");
 }
+next();
+}
+    
 
-module.exports = {cache}
+module.exports = cacheMiddleware

@@ -29,4 +29,4 @@ const authe= (req, res, next) =>{
 }
 
 
-module.exports = {authe}
+module.exports = authe

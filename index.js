@@ -5,9 +5,9 @@ const path = require('path');
 
 const {userGet} = require('./controllers/user.js');
 const {time} = require('./controllers/time.js');
-const {authe} = require('./middlewares/auth.js');
-const {cache} = require('./middlewares/cache.js');
-const { uploadPost } = require('./controllers/upload');
+const authe = require('./middlewares/auth.js');
+const cache = require('./middlewares/cache.js');
+const uploadPost  = require('./controllers/upload');
 const fileUpload = require('express-fileupload');
 const fileFilter = require('./middlewares/upload');
 const error = require('./controllers/error');
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/user', userGet);
 
-//app.post('/upload', fileFilter, uploadPost);
+app.post('/upload', fileFilter, uploadPost);
 
 
 app.post('/time', cors(), authe, cache, time);
