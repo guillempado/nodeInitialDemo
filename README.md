@@ -1,50 +1,81 @@
+# nodeInitialDemo
+🧬 
+# Branca api 4.2: Entrega 4.2: Node REST + DB + JWT
 
-# Node Initial Project
+## Instruccions per a iniciar el projecte:
 
-### Project Structure
+Instal·lar els mòduls amb:
 
-Main structure of node.js project. Folders / files:
+```
+npm install
+```
 
-- <b>\_\_tests__</b>. Tests folder. See [Jest Docs](https://jestjs.io/es-ES/docs/configuration) and [Chai Docs](https://www.chaijs.com/)
-- <b>app</b>:
-    - <b>config</b>
-    - <b>controllers</b>
-    - <b>crons</b>
-    - <b>middleware</b>
-    - <b>models</b>
-    - <b>routes</b>
-    - <b>tmp</b>
-    - <b>app.js</b>. Entry point.
-- <b>.env</b>. Environment descriptor. See [dotenv doc](https://www.npmjs.com/package/dotenv).
-- <b>.eslintrc</b>. Linter JS, static code analyzer. See [EsLint Docs](https://eslint.org/docs/user-guide/configuring/configuration-files).
-- <b>.prettierignore</b>. Code formatter. See [Prettier Config](https://prettier.io/docs/en/configuration.html) and [Prettier Ignore](https://prettier.io/docs/en/ignore.html).
-- <b>.ecosystem.config.js</b>. Process Manage at runtime. See [PM2 Docs](https://pm2.keymetrics.io/).
-- <b>package.json</b>.
+Per a iniciar el server:
 
-### Import project for use with WebStorm
-
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-![Open Project](img/webstorm_open.png)
+Mode producció:
 
 
-### Import project for use with Visual Studio Code
+```
+npm start
+```
 
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-  ![Open Project](img/VSC_open.png)
+Mode desenvolupament:
+
+```
+npm run dev
+```
+
+## Instruccions Bases de dades:
+
+Les dades de la base de dades (perquè no hi hagi problemes de sobreescriptura) són els següents:
+
+  user: "root",
+  password: "root1111_",
+  database: "dice_game",
+  host: "localhost",
+  dialect: "mysql",
+  
+Depenent de si vols fer servir la persistència en la base de dades MongoDB o MySQL s'haurà de canviar el "dialect". 
+És a dir, si es vol guardar les dades a MongoDB:
+
+```
+dialect: "mongo"
+```
+
+I si es vol fer servir la base de dades de MySQL:
+
+```
+dialect: "mysql"
+```
 
 
-### Utilities
+## Endpoints 
 
-* [Node Developers Guide](https://nodejs.dev/learn)
-* **.gitignore file** configuration. See [Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
-* **Git branches**. See [Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+Els endpoints establerts eren els següents:
+
+POST /players: crea un jugador;
+
+PUT /players/{id}: modifica el nom del jugador;
+
+GET /players: retorna el llistat de tots els jugadors del sistema amb el seu percentatge d’èxits;
+
+POST /games/{id}: un jugador específic realitza una tirada;
+
+DELETE /games/{id}: elimina les tirades del jugador;
+
+GET /games/{id}: retorna el llistat de jugades per un jugador;
+
+GET /ranking: retorna un ranking de jugadors ordenat per percentatge d'èxits i el percentatge d’èxits mig del conjunt de tots els jugadors;
+
+GET /ranking/loser: retorna el jugador amb pitjor percentatge d’èxit;
+
+GET /ranking/winner: retorna el jugador amb millor percentatge d’èxit;
+
+
+CORRECCIONS:
+
+•	Diferents rutes tornen arrays buits (si no hi ha jocs, si no hi ha usuaris, etc). Si no hi ha res a tornar hauries de tornar un missatge dient "no hi ha jugadors" o algo així, no un array buit
+•	Hi ha codi una mica desordenat en alguns arxius: usa el Format Document de VSC o alguna eina així i comenta els arxius on hi hagi diferents seccions
+•	L'estructura està força bé. Jo posaria a /config tot el que fa de switch per seleccionar una database o una altra. A /database només les connexions, etc
+•	Hi ha molts logs al server de producció, s'haurien de reduir al minim: "s'ha creat un usuari", "connexió amb la base de dades correcta", "server actiu al port XXXX"...
+•	La ruta /ranking peta si no hi ha jocs, no hauria de tornar 500, sino 200 amb un missatge d'error ❌
