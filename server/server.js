@@ -13,6 +13,7 @@ const express = require('express');
 
      */
     app.use('/register', require('./routes/register'))
+    app.use('/login', require('./routes/login'))
     app.use('/', require('./routes/default'))
 
     const server = app.listen(process.env.SERVER_PORT, () => {

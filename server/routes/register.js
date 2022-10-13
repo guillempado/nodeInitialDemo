@@ -12,6 +12,7 @@ router.post('/', jsonParser, async (req, res) => {
         // Retorna error si body no conté els fields necessaris
         if(req.body.username == null || req.body.password == null){
             res.status(400).json({ error: "Required keys in body: username, password" });
+            return;
         }
 
         // Retorna error si ja existeix
@@ -19,12 +20,14 @@ router.post('/', jsonParser, async (req, res) => {
 
         if (foundUser != null) {
             res.status(403).json({ error: "Username already exists" });
+            return;
         }
 
         // Encripta password
         let hashPassword = await bcrypt.hash(req.body.password, 10);
         if (hashPassword == null) {
             res.status(500).json({ error: "Server was unable to hash password" });
+            return;
         }
 
         // Desa nou usuari
@@ -34,6 +37,7 @@ router.post('/', jsonParser, async (req, res) => {
         });
         if (user == null) {
             res.status(500).json({ error: "Server was unable to save the new user to the database" });
+            return;
         }
 
         // Retorna
