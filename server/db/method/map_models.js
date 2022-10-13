@@ -7,12 +7,14 @@ module.exports = new Promise(async (resolve, reject) => {
         await require("./connect");
 
         // Incorporar tots els models manualment
-        db.Player = require('../../models/player');
-        db.Game = require('../../models/game');
+        db.User = require('../../models/user');
 
         // Map FK
-        db.Player.Game = db.Player.hasMany(db.Game)
-        db.Game.Player = db.Game.belongsTo(db.Player)
+        /*
+         // Exemple:
+         db.Player.Game = db.Player.hasMany(db.Game)
+         db.Game.Player = db.Game.belongsTo(db.Player)
+         */
 
         // Sync dels models
         await db.sequelize.sync();
