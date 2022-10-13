@@ -1,3 +1,4 @@
-**/.env
-**/.vscode
+.env
+.idea
+.vscode
 node_modules
