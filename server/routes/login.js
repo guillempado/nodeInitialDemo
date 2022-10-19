@@ -34,6 +34,14 @@ router.post('/', jsonParser, async (req, res) => {
 
         // Cas: login OK
         // TODO: a retornar cookie de sessió, de manera que es quedi loguejat
+        /*
+         // Recursos per fer-ho:
+         https://duckduckgo.com/?t=ffab&q=session+cookie+node&ia=web
+         https://www.geeksforgeeks.org/session-cookies-in-node-js/
+         https://www.sohamkamani.com/nodejs/session-cookie-authentication/
+         https://www.geeksforgeeks.org/http-cookies-in-node-js/
+
+         */
         res.status(200).json({ message: "OK" });
 
 
