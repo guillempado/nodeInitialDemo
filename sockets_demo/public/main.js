@@ -13,10 +13,10 @@ render = data => {
     return(`<div>
             <strong>${elem.author}</strong>: 
             <em>${elem.text}</em> </div>`);
-  }).join(" ");   
+  }).join(" ");
 
   document.getElementById('messages').innerHTML = html; 
-} 
+}
 
 addMessage = e => { 
   let message = { 

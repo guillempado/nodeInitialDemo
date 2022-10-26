@@ -29,6 +29,6 @@ io.on('connection', socket => {
     }); 
 }); 
 
-server.listen(80, function() { 
-    console.log("Server running on http://localhost:80"); 
+server.listen(8080, function() {
+    console.log("Server running on http://localhost:8080");
 });

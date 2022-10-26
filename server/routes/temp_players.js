@@ -11,7 +11,7 @@ router.post('/', jsonParser, async (req, res) => {
 
     // Bad request si falta field name
     if (!('name' in req.body)) {
-        res.status(400).json({ error: 'Missing JSON body with a \'name\' field in it' })
+        res.status(400).json({ error: `Missing JSON body with a 'name' field in it` })
         return;
     }
 

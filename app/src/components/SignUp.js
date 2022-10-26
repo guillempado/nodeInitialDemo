@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import User from '../common/User'
-
-import { login } from "../services/Auth";
-
+import {register} from "../services/Auth";
 import { withRouter } from '../common/with-router';
+import User from "../common/User";
 
-class Login extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
@@ -16,7 +13,8 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            loading: false
+            loading: false,
+            error: ""
         };
     }
 
@@ -36,11 +34,13 @@ class Login extends Component {
         e.preventDefault();  // Necessari per evitar comportament per defecte del html form on submit (redirect, reload...)
         console.log("Submit!")  // Funciona?
 
+
         try {
-            const response = await login(this.state.username, this.state.password);
+            const response = await register(this.state.username, this.state.password);
+            console.log("Response received")
+            console.log(response);
             if(response.status === 200){
                 console.log("Status 200")
-
                 this.props.setToken(response.data.token);
                 User.name = this.state.username;
                 User.token = response.data.token;
@@ -70,12 +70,11 @@ class Login extends Component {
 
                 {/* TODO Centrar el card de login a la pàgina */}
 
-
                 <form className = "card card-container"
                       onSubmit = {this.onSubmit} >
 
                     {/* TODO treure inlines i posar-ho tot en el CSS a part */}
-                    <h1 style = {{ textAlign: "center" }} >Login</h1 >
+                    <h1 style = {{ textAlign: "center" }} >Sign Up</h1 >
                     <br />
                     <div className = "form-group" >
                         <label htmlFor = "login_name" >User Name</label >
@@ -99,23 +98,18 @@ class Login extends Component {
                                required ></input >
                     </div >
                     <br />
-                    {this.state.error && (<div className = "alert alert-danger alert-dismissible fade show" style={{
-                        textAlign: "center",
-                        paddingLeft: 20,
-                        paddingRight: 20
-                    }} >
-                        {this.state.error}
-                    </div >)}
+                    <div className = "form-group" >
+                        {this.state.error && (<div className = "alert alert-danger alert-dismissible fade show" style={{
+                            textAlign: "center",
+                            paddingLeft: 20,
+                            paddingRight: 20
+                        }} >
+                            {this.state.error}
+                        </div >)}
+                    </div>
                     <button type = "submit"
                             className = "btn btn-primary" >Submit
                     </button >
-                    <br />
-                    <p style = {{ textAlign: "center" }} >Not registered?</p >
-                    <Link type = "submit"
-                          className = "btn btn-primary btn-block"
-                          style={{ width: "100%"}}
-                          to = "/signup" > Sign Up
-                    </Link >
                 </form >
 
             </div >
@@ -123,4 +117,4 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login);
+export default withRouter(SignUp);

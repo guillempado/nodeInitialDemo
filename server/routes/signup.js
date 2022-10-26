@@ -5,12 +5,15 @@ const jsonParser = bodyParser.json()
 const bcrypt = require("bcrypt");
 
 const { User } = require('../db/db')
+const {
+    generateToken
+} = require("../common/jwt_auth")
 
 router.post('/', jsonParser, async (req, res) => {
     try {
 
         // Retorna error si body no conté els fields necessaris
-        if(req.body.username == null || req.body.password == null){
+        if (req.body.username == null || req.body.password == null) {
             res.status(400).json({ error: "Required keys in body: username, password" });
             return;
         }
@@ -41,7 +44,13 @@ router.post('/', jsonParser, async (req, res) => {
         }
 
         // Retorna
-        res.status(200).json({ message: "User registered" })
+        // Cas: login OK: retorna token de sessió
+        res.status(200).json({
+            token: generateToken({
+                user: req.body.username,
+                password: req.body.password
+            })
+        })
 
     } catch (error) {
         res.status(500).json({ error });
