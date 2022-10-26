@@ -41,7 +41,6 @@ class Login extends Component {
             if(response.status === 200){
                 console.log("Status 200")
 
-                this.props.setToken(response.data.token);
                 User.name = this.state.username;
                 User.token = response.data.token;
                 this.props.router.navigate("/chats");

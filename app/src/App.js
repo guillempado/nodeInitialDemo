@@ -4,25 +4,15 @@ import ChatsController from "./components/ChatsController";
 import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./components/SignUp";
-import { useState } from "react";
-
 
 
 function App() {
 
-    const [appState, setAppState] = useState({
-        token: ""
-    })
-
-    const setToken = token => {
-        setAppState({token})
-    }
-
     return (
         <Routes>
-            <Route path="/login" element={<Login setToken={setToken}/>} />
-            <Route path="/signup" element={<SignUp setToken={setToken}/>} />
-            <Route path="/chats" element={<ChatsController token={appState.token}/>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/chats" element={<ChatsController />} />
             <Route path="*" element={ <Navigate to="/login" /> } />
         </Routes>
     );

@@ -35,11 +35,11 @@ class ChatsController extends Component {
     async componentDidMount() {
 
         // Valida que tens token
-        if (this.props.token === null || this.props.token.length === 0)
+        if (User.token === "")
             this.props.router.navigate("/login");
 
         // Connect
-        this.socket = await ws.connect(this.props.token);
+        this.socket = await ws.connect(User.token);
         console.log(this.socket)
         // TODO gestió d'errors de connexió (try/catch?)
 
