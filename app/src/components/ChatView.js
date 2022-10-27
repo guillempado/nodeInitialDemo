@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ChatView = ({rooms, socketSend}) => {
     // Per React Dev Tools
@@ -25,11 +25,19 @@ const ChatView = ({rooms, socketSend}) => {
     console.log(rooms)
     console.log(rooms[rooms._selectedRoom])
 
+    useEffect(e => {
+        const input = document.getElementById('message_input');
+        // Recorda que hi ha vegades que no renderitzes l'input (transició entre una petició de sala nova i que el missatge de sala nova arribi del servidor) -- Valido que existeix per no accedir a propietats si no existeix (trencaria l'app)
+        input && input.focus();
+    })
+
     return(
-        <div style={{
-            border: "1px groove",
-            padding: "20px"
-        }}>
+        <div
+            style={{
+                border: "1px groove",
+                padding: "20px"
+            }}
+        >
             <h1 style={{
                 marginBottom: "20px"
             }}>ChatView</h1 >
@@ -53,6 +61,7 @@ const ChatView = ({rooms, socketSend}) => {
                         value = {messageInputValue}
                         placeholder = "Nou Missatge"
                         required
+                        autoFocus ="true"
                     />
                     <input type = "submit"
                         value = "Enviar!" />
