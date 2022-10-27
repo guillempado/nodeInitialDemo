@@ -22,6 +22,11 @@ module.exports = new Promise(async (resolve, reject) => {
             password
         });
 
+        if(process.env.DATABASE_INIT === "drop_create")
+            await connection.promise().query(
+                `DROP DATABASE IF EXISTS ${database};`
+            );
+
         await connection.promise().query(
             `CREATE DATABASE IF NOT EXISTS ${database};`
         );

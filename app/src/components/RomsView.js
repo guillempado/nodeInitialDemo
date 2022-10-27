@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-export default ({rooms, selectRoom, socketSend}) => {
+const RoomsView = ({rooms, selectRoom, socketSend}) => {
+
+    // Per React Dev Tools
+    RoomsView.displayName = "RoomsView";
 
     const [roomInputValue, setRoomInputValue] = useState("");
 
@@ -41,3 +44,5 @@ export default ({rooms, selectRoom, socketSend}) => {
         </div>
     )
 }
+
+export default RoomsView;

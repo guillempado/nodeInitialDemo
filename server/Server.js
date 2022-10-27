@@ -40,7 +40,8 @@ const CLIENT_ORIGIN = 'http://localhost';
         "Room 1": [
             {
                 author: "Guillem P.",
-                text: "Missatge preexistent"
+                text: "Missatge preexistent",
+                ts: new Date()
             },
         ]
     }
@@ -68,7 +69,8 @@ const CLIENT_ORIGIN = 'http://localhost';
                 const message = {
                     // Validació de l'user es fa per token! De manera q sigui impossible dir q el missatge és d'un altre usuari
                     author: user.user,
-                    text: data.text
+                    text: data.text,
+                    ts: new Date()
                 };
 
                 console.log("New message:")

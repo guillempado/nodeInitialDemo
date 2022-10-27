@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-export default ({rooms, socketSend}) => {
+const ChatView = ({rooms, socketSend}) => {
+    // Per React Dev Tools
+    ChatView.displayName = "ChatView";
 
     const [messageInputValue, setMessageInputValue] = useState("");
     /**
@@ -36,6 +38,7 @@ export default ({rooms, socketSend}) => {
             {rooms[rooms._selectedRoom].map((message, index) => (
                 <li key = {index} style={{listStyleType: "none"}}>
                     <div >
+                        <em > {new Date(message.ts).toLocaleTimeString()} - </em >
                         <strong >{message.author} </strong >:
                         <em > {message.text}</em >
                     </div >
@@ -57,3 +60,5 @@ export default ({rooms, socketSend}) => {
         </div>
     )
 }
+
+export default ChatView;

@@ -37,15 +37,15 @@ class ChatsController extends Component {
     async componentDidMount() {
 
         // Valida que tens token
-        if (User.token === "")
+        if (User.token === "") {
             this.props.router.navigate("/login");
+            window.location.reload();
+        }
 
         // Connect
         this.socket = await ws.connect(User.token);
         console.log(this.socket)
         // TODO gestió d'errors de connexió (try/catch?)
-
-        // PROVA PER WEBSOCKETS
 
         // Load historical
         this.socket.on('historical', rooms => {
@@ -58,7 +58,8 @@ class ChatsController extends Component {
             console.log(data)
             let message = {
                 author: data.author,
-                text: data.text
+                text: data.text,
+                ts: data.ts
             }
 
             let room = [];
