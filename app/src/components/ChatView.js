@@ -15,7 +15,7 @@ export default ({rooms, socketSend}) => {
             text: messageInputValue
         };
 
-        socketSend(message);
+        socketSend('new_client_message', message);
 
         setMessageInputValue("")
     }
@@ -47,7 +47,9 @@ export default ({rooms, socketSend}) => {
                        id = "message_input"
                        onChange= {event => {setMessageInputValue(event.target.value)}}
                        value = {messageInputValue}
-                       placeholder = "Nou Missatge" />
+                       placeholder = "Nou Missatge"
+                       required
+                />
                 <input type = "submit"
                        value = "Enviar!" />
             </form >

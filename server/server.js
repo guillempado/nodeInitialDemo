@@ -89,6 +89,11 @@ const CLIENT_ORIGIN = 'http://localhost';
                     ...message
                 });
             });
+
+            socket.on('new_room', room => {
+                historical[room] = []
+                io.sockets.emit('new_room', room);
+            });
         } catch (e) {
             console.log(e)
         }

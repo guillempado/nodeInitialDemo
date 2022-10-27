@@ -70,11 +70,16 @@ class ChatsController extends Component {
 
             let roomName = data.room;
 
+            // DEBUG: CAL POSAR ROOMNAME ENTRE [] PERQUÈ SINÓ POSA LITERALMENT 'ROOMNAME' (des de 2021: https://stackoverflow.com/a/11508490)
             this.setState({
                 [roomName]: room
             })
 
             console.log(this.state)
+        });
+
+        this.socket.on('new_room', room => {
+            this.setState({[room]: []})
         });
     }
 
@@ -86,11 +91,11 @@ class ChatsController extends Component {
      */
     /**
      * Serveix per enviar missatge a websockets
-     * @param e form event que conté el missatge a enviar
+     * @param subject el concepte d'emissió
+     * @param data les dades
      */
-    const
-    socketSend = message => {
-        this.socket.emit('new_client_message', message);
+    socketSend = (subject, data) => {
+        this.socket.emit(subject, data);
     }
 
     /**
@@ -101,6 +106,11 @@ class ChatsController extends Component {
         // TODO get(room, fromTime, n = 30)
     }
 
+    selectRoom = room => {
+        console.log(`Selected room: ${room}`)
+        this.setState({_selectedRoom: room})
+    }
+
     render = () => {
         return (
             <div style={{
@@ -108,7 +118,9 @@ class ChatsController extends Component {
             }} >
                 <h1 >ChatsController</h1 >
                 <p >Aquest és el component ChatsController</p >
-                <RomsView />
+                <RomsView rooms = {this.state}
+                          selectRoom = {this.selectRoom}
+                          socketSend = {this.socketSend}/>
                 <ChatView rooms = {this.state}
                           socketSend = {this.socketSend} />
             </div >
