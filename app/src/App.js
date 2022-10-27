@@ -5,9 +5,7 @@ import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./components/SignUp";
 
-
 function App() {
-
     return (
         <Routes>
             <Route path="/login" element={<Login />} />

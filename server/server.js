@@ -11,7 +11,7 @@ const CLIENT_ORIGIN = 'http://localhost';
 (async () => {
     await require('./db/method/map_models');
     const app = express();
-    app.use(cors({origin: CLIENT_ORIGIN}));
+    app.use(cors({ origin: CLIENT_ORIGIN }));
 
     // Log request de debug
     // app.use(log_request)
@@ -31,55 +31,68 @@ const CLIENT_ORIGIN = 'http://localhost';
     const io = socketIO(server, {
         cors: {
             origin: CLIENT_ORIGIN,
-                methods: ["GET", "POST"]
+            methods: ["GET", "POST"]
         }
     });
 
     // PROVA DEMO WEBSOCKETS
-    const messages = [{
-        author: "Guillem P.",
-        text: "Missatge preexistent"
-    }];
+    const historical = {
+        "Room 1": [
+            {
+                author: "Guillem P.",
+                text: "Missatge preexistent"
+            },
+        ]
+    }
 
     io.on('connection', socket => {
         // if("token" in socket)
         console.log(`User connected`)
-        try{
+        try {
             const token = socket.handshake.auth.token;
             console.log(`Token: ${token}`)
             const user = getTokenData(token);
-            console.log({user: user.user, password: user.password})
+            console.log({
+                user: user.user,
+                password: user.password
+            })
 
             // TODO comprova que conté un user vàlid i que no està caducat (retorna error en aquest cas)
 
             // PROVA DEMO WEBSOCKETS
 
             // Envia missatges a client
-            socket.emit('messages', messages);
+            socket.emit('historical', historical);
 
-            socket.on('new-message', data => {
+            socket.on('new_client_message', data => {
+                const message = {
+                    // Validació de l'user es fa per token! De manera q sigui impossible dir q el missatge és d'un altre usuari
+                    author: user.user,
+                    text: data.text
+                };
 
-                console.log("Messages:")
-                console.log(messages)
+                console.log("New message:")
+                console.log(message)
 
-                console.log("New data:")
-                console.log(data)
+                if (!data.room in historical){
+                    historical[data.room] = [];
+                }
 
-                messages.push(data);
+                historical[data.room].push(message);
 
                 console.log('Missatges del servidor actualitzats:');
-                console.log(messages);
+                console.log(historical);
 
-                // Envia missatges A TOTS els clients connectats per socket
-                io.sockets.emit('messages', messages);
+                // Envia NOU missatge A TOTS els clients connectats per socket
+                io.sockets.emit('new_server_message', {
+                    room: data.room,
+                    ...message
+                });
             });
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
         }
 
-        //console.log(Object.keys(socket.client))
-        //console.log(socket.client)
-        });
+    });
 })()
 

@@ -11,18 +11,20 @@ class ChatsController extends Component {
         super(props);
 
         // Method bindings
-        this.sendMessage = this.sendMessage.bind(this);
         this.loadMore = this.loadMore.bind(this);
 
         // Estat de l'app de xats
         this.state = {
-            /*
-             rooms: {},  // tenen nom únic -> cada sala és un key, el valor : {lastRead: <timestamp>, messages: []}, on message = {author, text, timestamp}
-             selected: ""  // El nom del selected chat
-             */
-            messages: [],  // De moment faig un sol room
-            message: ""
+            // TODO fer selectedRoom dinàmic
+            // TODO en el moment que es crei un room de manera dinàmica, caldrà crear l'entrada tmb al diccionari de manera que no doni error.
+            // TODO Tip: els keys de l'objecte de room són els que caldrà renderitzar al menú de rooms
+            // DECISIÓ DE DISSENY: Rooms directament vessats a state per poder-los actualitzar separadament
+            "Room 1": [],  // tenen nom únic -> cada sala és un key, el valor : {lastRead: <timestamp>, messages: []}, on message = {author, text, timestamp}
+            _selectedRoom: "Room 1"  // El nom del selected chat
         };
+
+        console.log(this.state[this.state._selectedRoom])
+
     }
 
     /*
@@ -46,20 +48,50 @@ class ChatsController extends Component {
         // PROVA PER WEBSOCKETS
 
         // Load historical
-        this.socket.on('messages', messages => {
-            this.setState({ messages })
-            console.log(messages)
+        this.socket.on('historical', rooms => {
+            this.setState({ ...rooms, _selectedRoom: "Room 1" } )
         });
 
+        // Carrega missatges nous quan passin
+        this.socket.on('new_server_message', data => {
+            console.log("new server message:")
+            console.log(data)
+            let message = {
+                author: data.author,
+                text: data.text
+            }
 
+            let room = [];
 
+            if(data.room in this.state)
+                room = [...(this.state[data.room])]
+
+            room.push(message)
+
+            let roomName = data.room;
+
+            this.setState({
+                [roomName]: room
+            })
+
+            console.log(this.state)
+        });
     }
-/*
-    // Tanca socket en desinicialització
-    async componentWillUnmount() {
-        this.socket.disconnect();
+
+    /*
+     // Tanca socket en desinicialització
+     async componentWillUnmount() {
+     this.socket.disconnect();
+     }
+     */
+    /**
+     * Serveix per enviar missatge a websockets
+     * @param e form event que conté el missatge a enviar
+     */
+    const
+    socketSend = message => {
+        this.socket.emit('new_client_message', message);
     }
- */
 
     /**
      * Serveix per carregar més missatges a mesura que es tira enrera en el xat sota demanda
@@ -69,55 +101,16 @@ class ChatsController extends Component {
         // TODO get(room, fromTime, n = 30)
     }
 
-    /**
-     * Serveix per enviar missatge a websockets
-     * @param e form event que conté el missatge a enviar
-     */
-    sendMessage = e => {
-        e.preventDefault();
-
-        let message = {
-            author: User.name,
-            text: this.state.message
-        };
-
-        this.socket.emit('new-message', message);
-
-        this.setState({message: ""})
-
-
-        // TODO adaptar a multirooms -- send(room, message) -- Caldrà enviar token per recuperar l'author al servidor i q no es pugui hackejar
-    }
-
     render = () => {
         return (
-            <div >
+            <div style={{
+                padding: "40px"
+            }} >
                 <h1 >ChatsController</h1 >
                 <p >Aquest és el component ChatsController</p >
                 <RomsView />
-                <ChatView />
-
-                {/* PROVA PER WEBSOCKETS */}
-                <h1 >My App</h1 >
-
-                {this.state.messages.map((message, index) => (
-                    <li key = {index} style={{listStyleType: "none"}}>
-                        <div >
-                            <strong >{message.author} </strong >:
-                            <em > {message.text}</em >
-                        </div >
-                    </li >
-                ))}
-                <br />
-                <form onSubmit = {this.sendMessage} >
-                    <input type = "text"
-                           id = "message_input"
-                           onChange= {event => {this.setState({message: event.target.value})}}
-                           value = {this.state.message}
-                           placeholder = "Nou Missatge" />
-                    <input type = "submit"
-                           value = "Enviar!" />
-                </form >
+                <ChatView rooms = {this.state}
+                          socketSend = {this.socketSend} />
             </div >
         );
     }
