@@ -15,12 +15,8 @@ class ChatsController extends Component {
 
         // Estat de l'app de xats
         this.state = {
-            // TODO fer selectedRoom dinàmic
-            // TODO en el moment que es crei un room de manera dinàmica, caldrà crear l'entrada tmb al diccionari de manera que no doni error.
-            // TODO Tip: els keys de l'objecte de room són els que caldrà renderitzar al menú de rooms
             // DECISIÓ DE DISSENY: Rooms directament vessats a state per poder-los actualitzar separadament
-            "Room 1": [],  // tenen nom únic -> cada sala és un key, el valor : {lastRead: <timestamp>, messages: []}, on message = {author, text, timestamp}
-            _selectedRoom: "Room 1"  // El nom del selected chat
+            _selectedRoom: ""  // El nom del selected chat
         };
 
         console.log(this.state[this.state._selectedRoom])

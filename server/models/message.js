@@ -1,15 +1,16 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../db/db.js');
 
-module.exports = sequelize.define("user", {
-    name: {
+module.exports = sequelize.define("message", {
+    text: {
         type: DataTypes.STRING,
-        primaryKey: true
-    },
-    password: {
-        type: DataTypes.TEXT,
         allowNull: false
     },
+    ts: {
+        type: DataTypes.DATE,
+        allowNull: false
+    }
+
 }, {
     timestamps: false,
     updatedAt: false,

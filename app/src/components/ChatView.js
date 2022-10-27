@@ -33,9 +33,9 @@ const ChatView = ({rooms, socketSend}) => {
             <h1 style={{
                 marginBottom: "20px"
             }}>ChatView</h1 >
-            <h2 >{rooms._selectedRoom}</h2 >
+            <h2 >{rooms._selectedRoom in rooms && rooms._selectedRoom}</h2 >
 
-            {rooms[rooms._selectedRoom].map((message, index) => (
+            {rooms._selectedRoom in rooms && rooms[rooms._selectedRoom].map((message, index) => (
                 <li key = {index} style={{listStyleType: "none"}}>
                     <div >
                         <em > {new Date(message.ts).toLocaleTimeString()} - </em >
@@ -45,18 +45,19 @@ const ChatView = ({rooms, socketSend}) => {
                 </li >
             ))}
             <br />
-            <form onSubmit = {sendMessage} >
-                <input type = "text"
-                       id = "message_input"
-                       onChange= {event => {setMessageInputValue(event.target.value)}}
-                       value = {messageInputValue}
-                       placeholder = "Nou Missatge"
-                       required
-                />
-                <input type = "submit"
-                       value = "Enviar!" />
-            </form >
-
+            {rooms._selectedRoom in rooms && (
+                <form onSubmit = {sendMessage} >
+                    <input type = "text"
+                        id = "message_input"
+                        onChange= {event => {setMessageInputValue(event.target.value)}}
+                        value = {messageInputValue}
+                        placeholder = "Nou Missatge"
+                        required
+                    />
+                    <input type = "submit"
+                        value = "Enviar!" />
+                </form >
+            )}
         </div>
     )
 }

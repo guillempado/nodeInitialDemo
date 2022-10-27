@@ -4,6 +4,7 @@ const cors = require('cors');
 //const log_request = require("./middleware/log_request");
 const socketIO = require('socket.io');
 const { getTokenData } = require("./common/jwt_auth");
+const db = require("./db/db");
 
 const API_MOUNT_POINT = '/api_v1.0';
 const CLIENT_ORIGIN = 'http://localhost';
@@ -36,15 +37,7 @@ const CLIENT_ORIGIN = 'http://localhost';
     });
 
     // PROVA DEMO WEBSOCKETS
-    const historical = {
-        "Room 1": [
-            {
-                author: "Guillem P.",
-                text: "Missatge preexistent",
-                ts: new Date()
-            },
-        ]
-    }
+    const historical = {}
 
     io.on('connection', socket => {
         // if("token" in socket)
@@ -65,7 +58,7 @@ const CLIENT_ORIGIN = 'http://localhost';
             // Envia missatges a client
             socket.emit('historical', historical);
 
-            socket.on('new_client_message', data => {
+            socket.on('new_client_message', async data => {
                 const message = {
                     // Validació de l'user es fa per token! De manera q sigui impossible dir q el missatge és d'un altre usuari
                     author: user.user,
@@ -75,6 +68,14 @@ const CLIENT_ORIGIN = 'http://localhost';
 
                 console.log("New message:")
                 console.log(message)
+
+                // Guarda missatge a base de dades
+                await db.Message.create({
+                    text: message.text,
+                    ts: message.ts,
+                    userName: message.author,   // userName és la FK per defecte
+                    roomName: data.room         // roomName és la FK per defecte
+                })
 
                 if (!data.room in historical){
                     historical[data.room] = [];
@@ -92,8 +93,15 @@ const CLIENT_ORIGIN = 'http://localhost';
                 });
             });
 
-            socket.on('new_room', room => {
+            socket.on('new_room', async room => {
+
                 historical[room] = []
+
+                // Guarda nou room a BBDD
+                await db.Room.create({
+                    name: room
+                })
+
                 io.sockets.emit('new_room', room);
             });
         } catch (e) {

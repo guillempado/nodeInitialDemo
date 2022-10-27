@@ -8,13 +8,14 @@ module.exports = new Promise(async (resolve, reject) => {
 
         // Incorporar tots els models manualment
         db.User = require('../../models/user');
+        db.Room = require('../../models/room');
+        db.Message = require('../../models/message');
 
-        // Map FK
-        /*
-         // Exemple:
-         db.Player.Game = db.Player.hasMany(db.Game)
-         db.Game.Player = db.Game.belongsTo(db.Player)
-         */
+        // Map FKs
+        db.User.hasMany(db.Message);
+        db.Message.belongsTo(db.User /*, {foreignKey: 'userId'}*/);
+        db.Room.hasMany(db.Message);
+        db.Message.belongsTo(db.Room /*, {foreignKey: 'roomId'}*/);
 
         // Sync dels models
         await db.sequelize.sync();
