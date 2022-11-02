@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const { User } = require('../db/db')
 const {
     generateToken
-} = require("../common/jwt_auth")
+} = require("../services/jwt_auth")
 
 router.post('/', jsonParser, async (req, res) => {
     try {

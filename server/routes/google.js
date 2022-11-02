@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
 const {
     generateToken
-} = require("../common/jwt_auth")
+} = require("../services/jwt_auth")
 
 const { google } = require('googleapis');
 const oauth2 = google.oauth2('v2');

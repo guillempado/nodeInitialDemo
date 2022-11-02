@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const RoomsView = ({rooms, selectRoom, socketSend}) => {
 
@@ -25,11 +25,11 @@ const RoomsView = ({rooms, selectRoom, socketSend}) => {
         }}>
             <h1 style={{
                 marginBottom: "20px"
-            }}>RoomsView</h1 >
+            }}>Sales</h1 >
             {Object.keys(rooms).filter(room => room[0] !== '_').map((room, index) => (
-                <li key = {index} style={{listStyleType: "none"}}>
+                <li key = {index} style={{listStyleType: "none" }}>
                     <div >
-                        <strong onClick={e => selectRoom(e.target.innerText)}>{ room } </strong >
+                        <strong style={{cursor: "pointer"}} onClick={e => selectRoom(e.target.innerText)}>{ room } </strong >
                     </div >
                 </li >
             ))}

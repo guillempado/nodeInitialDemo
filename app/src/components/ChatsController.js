@@ -45,7 +45,18 @@ class ChatsController extends Component {
 
         // Load historical
         this.socket.on('historical', rooms => {
-            this.setState({ ...rooms, _selectedRoom: "Room 1" } )
+
+            // Selecciona primera sala perquè view de missatges no aparegui en blanc
+            let _selectedRoom = "";
+            for (const room of Object.keys(rooms)) {
+                if(room[0] !== '_'){
+                    _selectedRoom = room;
+                    break;
+                }
+            }
+
+            // Desa historical
+            this.setState({ ...rooms, _selectedRoom } )
         });
 
         // Carrega missatges nous quan passin

@@ -40,7 +40,7 @@ const ChatView = ({rooms, socketSend}) => {
         >
             <h1 style={{
                 marginBottom: "20px"
-            }}>ChatView</h1 >
+            }}>Missatges</h1 >
             <h2 >{rooms._selectedRoom in rooms && rooms._selectedRoom}</h2 >
 
             {rooms._selectedRoom in rooms && rooms[rooms._selectedRoom].map((message, index) => (

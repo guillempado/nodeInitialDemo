@@ -5,7 +5,7 @@ const jsonParser = bodyParser.json()
 const bcrypt = require("bcrypt");
 const {
     generateToken
-} = require("../common/jwt_auth")
+} = require("../services/jwt_auth")
 
 const { User } = require('../db/db')
 
