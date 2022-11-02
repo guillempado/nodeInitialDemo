@@ -1,0 +1,13 @@
+# Dotenv secrets
+.env
+
+# IDE folder
+.vscode
+.idea
+
+# temp dev files
+**/dev*
+
+# npm installed packages
+node_modules
+
