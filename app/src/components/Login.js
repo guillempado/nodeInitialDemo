@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import querystring from "querystring";
 import User from '../common/User'
+import GoogleConfig from '../google.config'
 
 import { login, sendGoogleCode } from "../services/Auth";
 import { withRouter } from '../common/with-router';
@@ -37,7 +38,7 @@ class Login extends Component {
         const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
         const options = {
             redirect_uri: `http://localhost/login`,
-            client_id: `677782702791-v4mf9mf4uhg2l3e2oesi6kng582a2r4f.apps.googleusercontent.com`,
+            client_id: GoogleConfig.client_id,
             access_type: "offline",
             response_type: "code",
             prompt: "consent",
