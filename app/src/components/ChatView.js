@@ -61,7 +61,7 @@ const ChatView = ({rooms, socketSend}) => {
                         value = {messageInputValue}
                         placeholder = "Nou Missatge"
                         required
-                        autoFocus ="true"
+                        autoFocus ={true}
                     />
                     <input type = "submit"
                         value = "Enviar!" />

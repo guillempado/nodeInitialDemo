@@ -77,15 +77,19 @@ class Login extends Component {
 
     // Si reps code de tornada de google OAuth, reenvia a servidor i autentica't
     async componentDidMount() {
-        const search = this.props.location.search;
-        const code = new URLSearchParams(search).get('code');
+        // Aconsegueix google code del GET request de tornada
+        const code = (new URL(window.location.href)).searchParams.get('code')
+        // Envia'l a l'API perquè trobi el nom d'usuari i retorni jwt
         if(code){
             try {
                 const response = await sendGoogleCode(code);
                 if(response.status === 200){
                     console.log("Status 200")
-                    User.name = this.state.username;
+                    // Continua flow com login normal
+                    User.name = response.data.user;
                     User.token = response.data.token;
+                    console.log("User: " + User.name)
+                    console.log("Token: " + User.token)
                     this.props.router.navigate("/chats");
                     //window.location.reload();
                 }
