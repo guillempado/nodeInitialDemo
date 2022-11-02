@@ -27,6 +27,17 @@ const register = async (username, password) => {
     }
 }
 
+const sendGoogleCode = async code => {
+    try{
+        return await axios.post(API_URL + "google", {
+            code
+        })
+    }
+    catch (e) {
+        return e.response;
+    }
+}
+
 const logout = () => {
     localStorage.removeItem("user");
 }
@@ -35,4 +46,4 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem('user'));
 }
 
-export {login, logout, register, getCurrentUser};
+export {login, logout, register, getCurrentUser, sendGoogleCode};

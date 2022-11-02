@@ -38,7 +38,7 @@ router.post('/', jsonParser, async (req, res) => {
         res.status(200).json({
             token: generateToken({
                 user: req.body.username,
-                password: req.body.password
+                //password: req.body.password
             })
         })
 

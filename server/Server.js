@@ -20,6 +20,7 @@ const CLIENT_ORIGIN = 'http://localhost';
     // És important importar les rutes quan el model ja estigui mapat per tenir disponibles els repositoris d'entitat (game, player, etc.). Per això faig require inline i no a principi del file.
     app.use(`${API_MOUNT_POINT}/auth/login`, require('./routes/login'))
     app.use(`${API_MOUNT_POINT}/auth/signup`, require('./routes/signup'))
+    app.use(`${API_MOUNT_POINT}/auth/google`, require('./routes/google'))
     app.use('/', require('./routes/default'))
 
     const server = app.listen(process.env.SERVER_PORT, () => {
