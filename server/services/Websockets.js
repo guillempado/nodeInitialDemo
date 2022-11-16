@@ -1,6 +1,7 @@
 const socketIO = require("socket.io");
 const db = require("../db/db");
 const { getTokenData } = require("./jwt_auth");
+const { debug_log } = require("../utils/console_debug");
 
 const setupWebsockets = async (server, CLIENT_ORIGIN) => {
 
@@ -28,12 +29,12 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
     // Websockets
     io.on('connection', socket => {
         // if("token" in socket)
-        console.log(`User connected`)
+        console.log(`New User connected`)
         try {
             const token = socket.handshake.auth.token;
-            console.log(`Token: ${token}`)
+            debug_log(`Token: ${token}`)
             const user = getTokenData(token);
-            console.log({
+            debug_log({
                 user: user.user,
                 password: user.password
             })
@@ -53,8 +54,8 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
                     ts: new Date()
                 };
 
-                console.log("New message:")
-                console.log(message)
+                debug_log("New message:")
+                debug_log(message)
 
                 // Guarda missatge a base de dades
                 await db.Message.create({
@@ -70,8 +71,8 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
 
                 historical[data.room].push(message);
 
-                console.log('Missatges del servidor actualitzats:');
-                console.log(historical);
+                debug_log('Missatges del servidor actualitzats:');
+                debug_log(historical);
 
                 // Envia NOU missatge A TOTS els clients connectats per socket
                 io.sockets.emit('new_server_message', {

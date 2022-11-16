@@ -23,7 +23,7 @@ module.exports = new Promise(async (resolve, reject) => {
         // Es pot fer una prova per comprovar q esta ben connectat
         db.sequelize.authenticate()
             .then(() => {
-                console.log('Connection has been established successfully.');
+                console.log('The connection to the database has been established successfully');
             })
             .catch(err => {
                 console.error('Unable to connect to the db:', err);

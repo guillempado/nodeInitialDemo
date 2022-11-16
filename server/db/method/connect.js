@@ -35,6 +35,7 @@ module.exports = new Promise(async (resolve, reject) => {
 
         // construeix sequelize object
         db.sequelize = new Sequelize(database, user, password, {
+                logging: process.env.IS_PROD !== "true",
                 dialect: 'mysql',
                 host,
                 port,
