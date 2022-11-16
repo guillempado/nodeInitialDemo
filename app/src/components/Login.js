@@ -95,9 +95,6 @@ class Login extends Component {
                 }
                 else{
                     console.log(response.data.error)
-                    this.setState({
-                        error: response.data.error + "!"
-                    })
                 }
             }
             catch (e) {
