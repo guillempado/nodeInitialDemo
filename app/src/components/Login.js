@@ -60,6 +60,10 @@ class Login extends Component {
                 console.log("Status 200")
                 User.name = this.state.username;
                 User.token = response.data.token;
+
+                // Guarda token a local storage per poder refrescar pàgina i que continui existint
+                window.localStorage.setItem("token", User.token);
+
                 this.props.router.navigate("/chats");
                 //window.location.reload();
             }

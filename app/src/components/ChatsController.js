@@ -34,8 +34,17 @@ class ChatsController extends Component {
 
         // Valida que tens token
         if (User.token === "") {
-            this.props.router.navigate("/login");
-            window.location.reload();
+
+            // Si no existeix carrega de local storage
+            const token = window.localStorage.getItem("token");
+
+            // Si no s'ha recuperat res de local storage, torna a pàgina de login
+            if(token === undefined || token === null || token === ""){
+                this.props.router.navigate("/login");
+                window.location.reload();
+            }
+
+            User.token = token
         }
 
         // Connect
