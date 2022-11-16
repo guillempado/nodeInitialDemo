@@ -1,4 +1,4 @@
 
 export default {
-    client_id: '677782702791-v4mf9mf4uhg2l3e2oesi6kng582a2r4f.apps.googleusercontent.com'
+    client_id: '341929636171-4dnut839v4ati75gbjdq03roaujao36s.apps.googleusercontent.com'
 }

@@ -22,60 +22,17 @@ const Oauth2Client = new google.auth.OAuth2(
 router.post('/', jsonParser, async (req, res) => {
     try {
 
+        console.log("Hi!")
         // Retorna error si body no conté els fields necessaris
         if (req.body.code == null) {
             res.status(400).json({ error: "Required keys in body: code" });
             return;
         }
 
-        /*
-        const code = req.query.code;
-        console.log(code)
-        let thisUrl = req.protocol + '://' + req.get('host') + req.originalUrl  // La mateixa URL en què et trobes, x ex 'http://localhost:3000/api_v1.0/auth/login/google'
-        thisUrl = thisUrl.slice(0, thisUrl.lastIndexOf('?'))  // Elimina query params
-        const url = "https://oauth2.googleapis.com/token";
-        const queryparams = {
-            code,
-            client_id: process.env.GOOGLE_CLIENT_ID,
-            client_secret: process.env.GOOGLE_CLIENT_SECRET,
-            redirect_uri: thisUrl,
-            grant_type: "authorization_code",
-        };
-        console.log(queryparams)
-        // Aconsegueix id i acces token de l'usuari a partir del codi d'accés retornat per OAuth
-        const {
-            id_token,
-            access_token
-        } = (await axios.post(url, querystring.stringify(queryparams), {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-        })).data
-        console.log(id_token)
-        console.log(access_token)
-        // Aconsegueix la info de perfil de l'usuari a partir dels tokens d'id i d'accés
-        const googleUser = (await axios
-            .get(
-                `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${id_token}`,
-                    },
-                }
-            )).data
-        console.log(googleUser)
-        // Si tot correcte, retorna token de login de sessió amb el nom d'usuari al token
-        res.status(200).json({
-            token: generateToken({
-                user: googleUser.name,
-                //password: req.body.password
-            })
-        })
-
-         */
-
         const code = req.body.code;
+        console.log(code)
         const { tokens } = await Oauth2Client.getToken(code);
+        console.log(tokens)
         Oauth2Client.setCredentials(tokens);
         const usr_info = await oauth2.userinfo.get({ auth: Oauth2Client });
         console.log(usr_info)
