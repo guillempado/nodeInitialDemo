@@ -12,6 +12,7 @@ class ChatsController extends Component {
 
         // Method bindings
         this.loadMore = this.loadMore.bind(this);
+        this.logout = this.logout.bind(this);
 
         // Estat de l'app de xats
         this.state = {
@@ -39,7 +40,7 @@ class ChatsController extends Component {
             const token = window.localStorage.getItem("token");
 
             // Si no s'ha recuperat res de local storage, torna a pàgina de login
-            if(token === undefined || token === null || token === ""){
+            if (token === undefined || token === null || token === "") {
                 this.props.router.navigate("/login");
                 window.location.reload();
             }
@@ -58,14 +59,17 @@ class ChatsController extends Component {
             // Selecciona primera sala perquè view de missatges no aparegui en blanc
             let _selectedRoom = "";
             for (const room of Object.keys(rooms)) {
-                if(room[0] !== '_'){
+                if (room[0] !== '_') {
                     _selectedRoom = room;
                     break;
                 }
             }
 
             // Desa historical
-            this.setState({ ...rooms, _selectedRoom } )
+            this.setState({
+                ...rooms,
+                _selectedRoom
+            })
         });
 
         // Carrega missatges nous quan passin
@@ -80,7 +84,7 @@ class ChatsController extends Component {
 
             let room = [];
 
-            if(data.room in this.state)
+            if (data.room in this.state)
                 room = [...(this.state[data.room])]
 
             room.push(message)
@@ -96,7 +100,7 @@ class ChatsController extends Component {
         });
 
         this.socket.on('new_room', room => {
-            this.setState({[room]: []})
+            this.setState({ [room]: [] })
         });
     }
 
@@ -125,19 +129,29 @@ class ChatsController extends Component {
 
     selectRoom = room => {
         console.log(`Selected room: ${room}`)
-        this.setState({_selectedRoom: room})
+        this.setState({ _selectedRoom: room })
+    }
+
+    logout = () => {
+        localStorage.removeItem("token")
+        this.props.router.navigate("/login");
     }
 
     render = () => {
         return (
-            <div style={{
+            <div style = {{
                 padding: "40px"
             }} >
-                <h1 >ChatsController</h1 >
+                <div className = "row" >
+                    <h1 className = "col-sm-10" >ChatsController</h1 >
+                    <button type = "button"
+                            className = "btn btn-primary col-sm-2" onClick={this.logout}>Logout
+                    </button >
+                </div >
                 <p >Aquest és el component ChatsController</p >
                 <RomsView rooms = {this.state}
                           selectRoom = {this.selectRoom}
-                          socketSend = {this.socketSend}/>
+                          socketSend = {this.socketSend} />
                 <ChatView rooms = {this.state}
                           socketSend = {this.socketSend} />
             </div >
