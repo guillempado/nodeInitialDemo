@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { withRouter } from '../common/with-router';
 import RomsView from './RomsView';
 import ChatView from './ChatView';
@@ -105,18 +105,18 @@ class ChatsController extends Component {
         });
 
         // Actualitza usuaris per sala
-        this.socket.on('selected_room_change', async data => {
-            let _users_per_room;
-            Object.assign(_users_per_room, this.state._users_per_room)  // Còpia
-            _users_per_room[data.user] = data.selectedRoom
-            this.setState({ _users_per_room })
-
+        this.socket.on('new_SelectedRoom', async data => {
+            console.log(`new_SelectedRoom: user: ${data.user}, room: ${data.selectedRoom}`)
+            const new_users_per_room = {...this.state._users_per_room}
+            new_users_per_room[data.user] = data.selectedRoom
+            this.setState({ _users_per_room: new_users_per_room })
         })
     }
 
     // Envia event a servidor quan client canvii de sala seleccionada
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState._selectedRoom !== this.state._selectedRoom) {
+            console.log("Nova sala seleccionada")
             this.socketSend("selected_room_change", { selectedRoom: this.state._selectedRoom })
         }
     }

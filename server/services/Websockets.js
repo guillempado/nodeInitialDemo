@@ -54,17 +54,19 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
             // Notifica clients de canvi de selecció de room
             socket.on('selected_room_change', async data => {
                 const user_name = user.user
+                debug_log(`selected_room_change. User: ${user_name}, Room: ${data.selectedRoom}`)
                 users_per_room[user_name] = data.selectedRoom;
-                socket.emit('new_SelectedRoom', {user: user_name, room:data.selectedRoom})
+                socket.emit('new_SelectedRoom', {user: user_name, selectedRoom:data.selectedRoom})
             })
 
+            /*
             // Notifica clients de canvi de selecció de room
             socket.on('selected_room_change', async data => {
                 const user_name = user.user
                 users_per_room[user_name] = data.selectedRoom;
                 socket.emit('new_SelectedRoom', {user: user_name, room:data.selectedRoom})
             })
-
+*/
             socket.on('new_client_message', async data => {
                 const message = {
                     // Validació de l'user es fa per token! De manera q sigui impossible dir q el missatge és d'un altre usuari
