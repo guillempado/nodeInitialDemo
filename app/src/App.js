@@ -11,7 +11,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/chats" element={<ChatsController />} />
-            <Route path="*" element={ <Navigate to="/chats" /> } />
+            <Route path="*" element={ <Navigate to="/login" /> } />
         </Routes>
     );
 }

@@ -26,6 +26,9 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
         })
     }
 
+    // Mantindrem també registre de la sala seleccionada per cada usuari
+    const users_per_room = {}
+
     // Websockets
     io.on('connection', socket => {
         // if("token" in socket)
@@ -41,10 +44,26 @@ const setupWebsockets = async (server, CLIENT_ORIGIN) => {
 
             // TODO comprova que conté un user vàlid i que no està caducat (retorna error en aquest cas)
 
-            // PROVA DEMO WEBSOCKETS
 
             // Envia missatges a client
             socket.emit('historical', historical);
+
+            // Envia cache de sales seleccionades per usuari
+            socket.emit('selected_rooms_cache', users_per_room);
+
+            // Notifica clients de canvi de selecció de room
+            socket.on('selected_room_change', async data => {
+                const user_name = user.user
+                users_per_room[user_name] = data.selectedRoom;
+                socket.emit('new_SelectedRoom', {user: user_name, room:data.selectedRoom})
+            })
+
+            // Notifica clients de canvi de selecció de room
+            socket.on('selected_room_change', async data => {
+                const user_name = user.user
+                users_per_room[user_name] = data.selectedRoom;
+                socket.emit('new_SelectedRoom', {user: user_name, room:data.selectedRoom})
+            })
 
             socket.on('new_client_message', async data => {
                 const message = {

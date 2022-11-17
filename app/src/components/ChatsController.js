@@ -4,6 +4,7 @@ import RomsView from './RomsView';
 import ChatView from './ChatView';
 import ws from "../services/Websockets";
 import User from "../common/User";
+import UsuarisConnectats from "./UsuarisConnectats";
 
 class ChatsController extends Component {
 
@@ -17,18 +18,13 @@ class ChatsController extends Component {
         // Estat de l'app de xats
         this.state = {
             // DECISIÓ DE DISSENY: Rooms directament vessats a state per poder-los actualitzar separadament
-            _selectedRoom: ""  // El nom del selected chat
+            _selectedRoom: "",  // El nom del selected chat
+            _users_per_room: {}
         };
 
         console.log(this.state[this.state._selectedRoom])
 
     }
-
-    /*
-     async componentDidUpdate(prevProps, prevState, snapshot){
-
-     }
-     */
 
     // Connecta i carrega historial de missatges
     async componentDidMount() {
@@ -72,6 +68,11 @@ class ChatsController extends Component {
             })
         });
 
+        // Carrega cache de sales seleccionades per usuari
+        this.socket.on('selected_rooms_cache', users_per_room => {
+            this.setState({ _users_per_room: users_per_room })
+        });
+
         // Carrega missatges nous quan passin
         this.socket.on('new_server_message', data => {
             console.log("new server message:")
@@ -102,6 +103,22 @@ class ChatsController extends Component {
         this.socket.on('new_room', room => {
             this.setState({ [room]: [] })
         });
+
+        // Actualitza usuaris per sala
+        this.socket.on('selected_room_change', async data => {
+            let _users_per_room;
+            Object.assign(_users_per_room, this.state._users_per_room)  // Còpia
+            _users_per_room[data.user] = data.selectedRoom
+            this.setState({ _users_per_room })
+
+        })
+    }
+
+    // Envia event a servidor quan client canvii de sala seleccionada
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState._selectedRoom !== this.state._selectedRoom) {
+            this.socketSend("selected_room_change", { selectedRoom: this.state._selectedRoom })
+        }
     }
 
     /*
@@ -145,13 +162,15 @@ class ChatsController extends Component {
                 <div className = "row" >
                     <h1 className = "col-sm-10" >ChatsController</h1 >
                     <button type = "button"
-                            className = "btn btn-primary col-sm-2" onClick={this.logout}>Logout
+                            className = "btn btn-primary col-sm-2"
+                            onClick = {this.logout} >Logout
                     </button >
                 </div >
                 <p >Aquest és el component ChatsController</p >
                 <RomsView rooms = {this.state}
                           selectRoom = {this.selectRoom}
                           socketSend = {this.socketSend} />
+                <UsuarisConnectats rooms = {this.state} />
                 <ChatView rooms = {this.state}
                           socketSend = {this.socketSend} />
             </div >
